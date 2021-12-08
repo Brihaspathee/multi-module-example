@@ -1,0 +1,45 @@
+version: '3.8'
+services:
+  customer_management:
+    image: vbalaji215/customer_management:0.0.1-SNAPSHOT
+    container_name: customer_management
+    networks:
+      - multi-mod-net
+    volumes:
+      - /Users/logs/multi_module/customer_management:/logs/local
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+  product_management:
+    image: vbalaji215/product_management:0.0.1-SNAPSHOT
+    container_name: product_management
+    networks:
+      - multi-mod-net
+    volumes:
+      - /Users/logs/multi_module/product_management:/logs/local
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+    depends_on:
+      - customer_management
+  order_processing:
+    image: vbalaji215/order_processing:0.0.1-SNAPSHOT
+    container_name: order_processing
+    networks:
+      - multi-mod-net
+    volumes:
+      - /Users/logs/multi_module/order_processing:/logs/local
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+    depends_on:
+      - customer_management
+      - product_management
+
+networks:
+  multi-mod-net:
+    name: multi-mod-net
+    driver: bridge
