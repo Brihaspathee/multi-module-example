@@ -1,10 +1,15 @@
 package com.mathisi.web.resource;
 
+import com.mathisi.command.service.interfaces.CustomerService;
+import com.mathisi.web.model.CustomerDto;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Set;
 
 /**
  * Created in Intellij IDEA
@@ -17,12 +22,16 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/v1/customer")
 public class CustomerResource {
+
+    private final CustomerService customerService;
 
     @GetMapping
     public ResponseEntity getAllCustomers(){
         log.info("Inside the customer controller");
-        return ResponseEntity.ok().body("Hello Customers!!!");
+        Set<CustomerDto> customerDtoSet = customerService.getAllCustomers();
+        return ResponseEntity.ok().body(customerDtoSet);
     }
 }

@@ -1,0 +1,2 @@
+insert into customer (customer_id, first_name, last_name, date_of_birth, gender, marital_status, created_date, updated_date) values ('e72a1ebb-9b50-4512-83dd-b7ec88e7a004', 'balaji', 'varadharajan', '1983-05-21', 'MALE', 'MARRIED', SYSDATE(), SYSDATE());
+insert into customer (customer_id, first_name, last_name, date_of_birth, gender, marital_status, created_date, updated_date) values ('693e6a2d-3046-4b36-be0b-4952b66ff508', 'pooja', 'mohanakrishnan', '1985-12-10', 'FEMALE', 'MARRIED', SYSDATE(), SYSDATE())
