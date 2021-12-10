@@ -2,6 +2,7 @@ package com.mathisi.web.resource;
 
 import com.mathisi.command.service.interfaces.CustomerService;
 import com.mathisi.web.model.CustomerDto;
+import com.mathisi.web.model.CustomerDtoSet;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -29,9 +30,9 @@ public class CustomerResource {
     private final CustomerService customerService;
 
     @GetMapping
-    public ResponseEntity getAllCustomers(){
+    public ResponseEntity<CustomerDtoSet> getAllCustomers(){
         log.info("Inside the customer controller");
         Set<CustomerDto> customerDtoSet = customerService.getAllCustomers();
-        return ResponseEntity.ok().body(customerDtoSet);
+        return ResponseEntity.ok().body(CustomerDtoSet.builder().customerDtoSet(customerDtoSet).build());
     }
 }
