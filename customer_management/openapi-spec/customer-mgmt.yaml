@@ -1,0 +1,65 @@
+openapi: 3.0.1
+info:
+  title: Customer Management API
+  contact:
+    name: Balaji Varadharajan
+    url: http://www.mathisi.org
+    email: vbalaji215@outlook.com
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/License-2.0.html
+  version: 1.0.0
+servers:
+- url: http://localhost:8080
+  description: Development Server
+paths:
+  /api/v1/customer:
+    get:
+      tags:
+      - customer
+      description: Get all the customers in the system
+      operationId: getAllCustomers
+      responses:
+        "200":
+          description: Successfully retrieved all customers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerDtoSet'
+components:
+  schemas:
+    CustomerDto:
+      required:
+      - firstName
+      type: object
+      properties:
+        customerId:
+          type: string
+          format: uuid
+        firstName:
+          type: string
+        lastName:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date
+        gender:
+          type: string
+          enum:
+          - MALE
+          - FEMALE
+        maritalStatus:
+          type: string
+          enum:
+          - SINGLE
+          - MARRIED
+          - DIVORCED
+          - WIDOWED
+    CustomerDtoSet:
+      type: object
+      properties:
+        customerDtoSet:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerDto'

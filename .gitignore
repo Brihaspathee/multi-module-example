@@ -1,4 +1,5 @@
 logs/
+openapi/server/codegen
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar

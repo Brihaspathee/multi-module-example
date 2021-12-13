@@ -1,3 +1,9 @@
+url:
+  order:
+    host: http://localhost:9092
+customer-mgmt:
+  api:
+    version: 1.0.0
 spring:
   h2:
     console:
