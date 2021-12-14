@@ -1,7 +1,11 @@
 package com.mathisi.web.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
 import java.util.Set;
 
 /**
@@ -18,7 +22,12 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Schema(description = "List of customers in the system")
+@Validated
 public class CustomerDtoSet {
 
+    @JsonProperty(required = true)
+    @Schema(description = "List of customers", minimum = "0")
+    @Valid
     private Set<CustomerDto> customerDtoSet;
 }

@@ -3,8 +3,13 @@ package com.mathisi.web.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mathisi.reference.data.Gender;
 import com.mathisi.reference.data.MaritalStatus;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
@@ -24,20 +29,37 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Schema(description = "Customer Object")
+@Validated
 public class CustomerDto {
 
     @JsonProperty(required = false)
+    @Schema(description = "Customer Id - This is a UUID value", example = "657cfd75-634e-49f1-9556-4d79f79848ec", required = false)
     private UUID customerId;
 
     @JsonProperty(required = true)
+    @Schema(description = "First Name of the customer", example = "John")
+    @NotNull
+    @NotBlank
+    @Size(min = 2, max = 100)
     private String firstName;
 
+    @JsonProperty(required = true)
+    @Schema(description = "Last Name of the customer", example = "Doe")
+    @NotBlank
+    @Size(min = 2, max = 100)
     private String lastName;
 
+    @JsonProperty(required = true)
+    @Schema(description = "Date of birth of the customer", example = "1983-05-21")
     private LocalDate dateOfBirth;
 
+    @JsonProperty(required = true)
+    @Schema(description = "Gender of the customer", example = "MALE")
     private Gender gender;
 
+    @JsonProperty(required = true)
+    @Schema(description = "Marital Status of the customer", example = "MARRIED")
     private MaritalStatus maritalStatus;
 
     @Override

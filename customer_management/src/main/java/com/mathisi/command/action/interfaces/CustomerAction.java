@@ -2,8 +2,10 @@ package com.mathisi.command.action.interfaces;
 
 import com.mathisi.domain.entity.Customer;
 import com.mathisi.web.model.CustomerDto;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Created in Intellij IDEA
@@ -22,4 +24,8 @@ public interface CustomerAction {
     Set<Customer> customerDtosToCustomers(Set<CustomerDto> customerDtos);
     Customer saveCustomer(Customer customer);
     Set<Customer> getAllCustomers();
+
+    Set<Customer> getAllSortedCustomers(PageRequest pageRequest);
+
+    Customer getCustomerById(UUID customerId);
 }

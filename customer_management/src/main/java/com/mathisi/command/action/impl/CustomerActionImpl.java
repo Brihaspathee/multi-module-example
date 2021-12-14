@@ -3,13 +3,16 @@ package com.mathisi.command.action.impl;
 import com.mathisi.command.action.interfaces.CustomerAction;
 import com.mathisi.domain.entity.Customer;
 import com.mathisi.domain.repository.CustomerRepository;
+import com.mathisi.exception.CustomerNotFoundException;
 import com.mathisi.mapper.interfaces.CustomerMapper;
 import com.mathisi.web.model.CustomerDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -58,5 +61,15 @@ public class CustomerActionImpl implements CustomerAction {
     @Override
     public Set<Customer> getAllCustomers() {
         return customerRepository.findAll().stream().collect(Collectors.toSet());
+    }
+
+    @Override
+    public Set<Customer> getAllSortedCustomers(PageRequest pageRequest) {
+        return customerRepository.findAll(pageRequest).stream().collect(Collectors.toSet());
+    }
+
+    @Override
+    public Customer getCustomerById(UUID customerId) {
+        return customerRepository.findById(customerId).orElseThrow(() -> new CustomerNotFoundException("Customer with id " + customerId + " not found"));
     }
 }

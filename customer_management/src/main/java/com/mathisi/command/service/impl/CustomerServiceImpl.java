@@ -6,6 +6,7 @@ import com.mathisi.domain.entity.Customer;
 import com.mathisi.web.model.CustomerDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -34,13 +35,22 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public Set<CustomerDto> getAllSortedCustomers(PageRequest pageRequest) {
+        Set<Customer> customers = customerAction.getAllSortedCustomers(pageRequest);
+        return customerAction.customersToCustomerDtos(customers);
+    }
+
+    @Override
     public CustomerDto getCustomerById(UUID customerId) {
-        return null;
+        Customer customer = customerAction.getCustomerById(customerId);
+        return customerAction.customerToCustomerDto(customer);
     }
 
     @Override
     public CustomerDto createCustomer(CustomerDto customerDto) {
-        return null;
+        Customer customer = customerAction.customerDtoToCustomer(customerDto);
+        customer = customerAction.saveCustomer(customer);
+        return customerAction.customerToCustomerDto(customer);
     }
 
     @Override

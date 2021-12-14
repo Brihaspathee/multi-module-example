@@ -1,6 +1,7 @@
 package com.mathisi.command.service.interfaces;
 
 import com.mathisi.web.model.CustomerDto;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.Set;
 import java.util.UUID;
@@ -17,6 +18,8 @@ import java.util.UUID;
 public interface CustomerService {
 
     Set<CustomerDto> getAllCustomers();
+
+    Set<CustomerDto> getAllSortedCustomers(PageRequest pageRequest);
 
     CustomerDto getCustomerById(UUID customerId);
 
