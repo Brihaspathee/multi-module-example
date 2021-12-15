@@ -38,6 +38,18 @@ paths:
               $ref: '#/components/schemas/CustomerDto'
         required: true
       responses:
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
         "201":
           description: Successfully created the customer
           content:
@@ -61,6 +73,12 @@ paths:
         example: c1984335-850b-43e4-9f7d-12034cef659c
       responses:
         "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiExceptionList'
+        "404":
           description: The requested customer was not found
           content:
             application/json:
@@ -123,6 +141,7 @@ components:
           type: string
           description: Customer Id - This is a UUID value
           format: uuid
+          readOnly: true
           example: 657cfd75-634e-49f1-9556-4d79f79848ec
         firstName:
           maxLength: 100
@@ -158,19 +177,6 @@ components:
           - DIVORCED
           - WIDOWED
       description: Customer Object
-    CustomerDtoSet:
-      required:
-      - customerDtoSet
-      type: object
-      properties:
-        customerDtoSet:
-          minimum: 0
-          uniqueItems: true
-          type: array
-          description: List of customers
-          items:
-            $ref: '#/components/schemas/CustomerDto'
-      description: List of customers in the system
     ApiException:
       type: object
       properties:
@@ -185,3 +191,16 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ApiException'
+    CustomerDtoSet:
+      required:
+      - customerDtoSet
+      type: object
+      properties:
+        customerDtoSet:
+          minimum: 0
+          uniqueItems: true
+          type: array
+          description: List of customers
+          items:
+            $ref: '#/components/schemas/CustomerDto'
+      description: List of customers in the system

@@ -34,7 +34,7 @@ import java.util.UUID;
 public class CustomerDto {
 
     @JsonProperty(required = false)
-    @Schema(description = "Customer Id - This is a UUID value", example = "657cfd75-634e-49f1-9556-4d79f79848ec", required = false)
+    @Schema(description = "Customer Id - This is a UUID value", example = "657cfd75-634e-49f1-9556-4d79f79848ec", required = false, accessMode = Schema.AccessMode.READ_ONLY)
     private UUID customerId;
 
     @JsonProperty(required = true)

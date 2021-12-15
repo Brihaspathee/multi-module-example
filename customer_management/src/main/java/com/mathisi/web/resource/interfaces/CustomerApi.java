@@ -95,6 +95,16 @@ public interface CustomerApi {
                     description = "Successfully created the customer",
                     content = {
                             @Content(mediaType = "application/json",schema = @Schema(implementation = CustomerDtoSet.class))
+                    }),
+            @ApiResponse(responseCode = "400",
+                    description = "Bad Request",
+                    content = {
+                            @Content(mediaType = "application/json",schema = @Schema(implementation = ApiExceptionList.class))
+                    }),
+            @ApiResponse(responseCode = "409",
+                    description = "Conflict",
+                    content = {
+                            @Content(mediaType = "application/json",schema = @Schema(implementation = ApiExceptionList.class))
                     })
     })
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -116,8 +126,13 @@ public interface CustomerApi {
                     content = {
                             @Content(mediaType = "application/json",schema = @Schema(implementation = CustomerDtoSet.class))
                     }),
-            @ApiResponse(responseCode = "400",
+            @ApiResponse(responseCode = "404",
                     description = "The requested customer was not found",
+                    content = {
+                            @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ApiExceptionList.class))
+                    }),
+            @ApiResponse(responseCode = "400",
+                    description = "Bad Request",
                     content = {
                             @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ApiExceptionList.class))
                     })
